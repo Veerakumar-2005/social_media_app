@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>News Feed</h2>
+<form method="POST" action="{{ url_for('create_post') }}" enctype="multipart/form-data">
+    <textarea name="content" placeholder="What's on your mind?" required></textarea><br>
+    <input type="file" name="image"><br>
+    <button>Post</button>
+</form>
+{% for post in posts %}
+    <div class="post">
+        <b>@{{ post[1] }}</b><br>
+        <p>{{ post[2] }}</p>
+        {% if post[3] %}
+            <img src="/static/uploads/{{ post[3] }}">
+        {% endif %}
+        <p>❤️ {{ post[4] }} <a href="{{ url_for('like', post_id=post[0]) }}">Like</a></p>
+        <form method="POST" action="{{ url_for('comment', post_id=post[0]) }}">
+            <input name="comment" placeholder="Write a comment...">
+            <button>Comment</button>
+        </form>
+    </div>
+{% endfor %}
+{% endblock %}
