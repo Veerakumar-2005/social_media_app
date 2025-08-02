@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ username }}'s Profile</h2>
+{% for post in posts %}
+    <div class="post">
+        <p>{{ post[0] }}</p>
+        {% if post[1] %}
+            <img src="/static/uploads/{{ post[1] }}">
+        {% endif %}
+    </div>
+{% endfor %}
+{% endblock %}
